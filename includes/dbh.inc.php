@@ -1,9 +1,9 @@
 <?php 
 
 $serverName = "localhost";
-$dbUserName = "root";
-$dbPassword = "";
-$dbName = "login-system";
+$dbUserName = "id19390409_akash";
+$dbPassword = "Fanny@9676996550";
+$dbName = "id19390409_login_system";
 // $serverName = "localhost";
 // $dbUserName = "id18295308_root";
 // $dbPassword = "px08sn%K0sXT[Q-H";

@@ -41,7 +41,7 @@ function uidExists($conn, $username, $email) {
     $sql = "SELECT * FROM users WHERE usersUid = ? OR usersEmail = ?;";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../signup.php?error=stmtfailed");
+        header("Location: https://tarmac-twine.000webhostapp.com/signup.php?error=stmtfailed");
         exit();
     }
 
@@ -65,7 +65,7 @@ function createUser($conn, $name, $email, $username, $pwd) {
     $sql = "INSERT INTO users (usersName, usersEmail, usersUid, usersPwd) VALUES (?, ?, ?, ?);";
     $stmt = mysqli_stmt_init($conn);
     if(!mysqli_stmt_prepare($stmt, $sql)) {
-        header("location: ../signup.php?error=stmtfailed");
+        header("Location: https://tarmac-twine.000webhostapp.com/signup.php?error=stmtfailed");
         exit();
     }
 
@@ -75,7 +75,13 @@ function createUser($conn, $name, $email, $username, $pwd) {
     mysqli_stmt_execute($stmt);
 
     mysqli_stmt_close($stmt);
-    header("location: ../signup.html?error=none");
+   // header("location: ../index.php");
+   session_start();
+   $uidExists = uidExists($conn, $username, $username);
+//   $_SESSION["userid"] = $uidExists["usersId"]; 
+   $_SESSION["useruid"] = $uidExists["usersUid"]; 
+   $_SESSION["userName"] = $username;
+   header("Location: https://tarmac-twine.000webhostapp.com/index.php?");
     exit();    
 }
 
@@ -92,7 +98,7 @@ function loginUser($conn, $username, $pwd) {
     $uidExists = uidExists($conn, $username, $username);
 
     if($uidExists === false) {
-        header("location: ../login.php?error=wronglogin");
+        header("Location: https://tarmac-twine.000webhostapp.com/login.php?error=wronglogin");
         exit();
     }
 
@@ -100,15 +106,15 @@ function loginUser($conn, $username, $pwd) {
     $checkPwd = password_verify($pwd, $pwdHashed);
 
     if($checkPwd === false) {
-        header("location: ../login.php?error=incorrectpassword");
+        header("Location:https://tarmac-twine.000webhostapp.com/login.php?error=incorrectpassword");
         exit();
     }
     else if($checkPwd === true) {
         session_start();
-        $_SESSION["userid"] = $uidExists["usersId"]; 
+        // $_SESSION["userid"] = $uidExists["usersId"]; 
         $_SESSION["useruid"] = $uidExists["usersUid"]; 
         $_SESSION["userName"] = $username;
-        header("location: ../index.php?");
+        header("Location: https://tarmac-twine.000webhostapp.com/index.php?");
         exit();
     }
 }

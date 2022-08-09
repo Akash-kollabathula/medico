@@ -49,8 +49,10 @@
             <a href="javascript:void(0)" class="closebtn">&times;</a>
             <a href="index.html">HOME</a>
             <a href="store.html">STORE</a>
+
             <?php 
                         if(isset($_SESSION["useruid"])) {
+                                echo '<script>alert("Successfully Logged in")</script>';
                                 echo "<a href='profile.php'>PROFILE</a>";
                                 echo "<a href='includes/logout.inc.php'>LOGOUT</a>";
                         }
@@ -145,6 +147,7 @@
             </div>
         </div>
     </div>
-    <script src = "js/script.js"></script>
+    <script src = "js/script.js">
+    </script>
 </body>
 </html>
